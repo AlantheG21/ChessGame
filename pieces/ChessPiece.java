@@ -11,7 +11,7 @@ package pieces;
  * This class overrides {@code toString()} to return a short string combining color and piece symbol for displaying.
  */
 public abstract class ChessPiece {
-    String color;   /** Color of the chess piece which is either "white" or "black" */
+    private String color;   /** Color of the chess piece which is either "white" or "black" */
 
     /**
      * Constructs a chess piece with its specific color.
