@@ -1,6 +1,6 @@
 package position;
 
-import pieces.ChessPieces;
+import pieces.ChessPiece;
 
 /**
  * Represents a position on the chess board.
@@ -9,7 +9,7 @@ import pieces.ChessPieces;
  * Overrides {@code toString()} for board display logic.
  */
 public class Position {
-    private ChessPieces chess_piece;
+    private ChessPiece chess_piece;
     private int x;
     private int y;
 
@@ -20,7 +20,7 @@ public class Position {
      * @param y           the column index of the position (0–7)
      * @param chess_piece the chess piece at this position (can be {@code null})
      */
-    public Position(int x, int y, ChessPieces chess_piece) {
+    public Position(int x, int y, ChessPiece chess_piece) {
         this.setPiece(chess_piece);
         this.setX(x);
         this.setY(y);
@@ -31,7 +31,7 @@ public class Position {
      *
      * @return the chess piece, or {@code null} if the square is empty
      */
-    public ChessPieces getPiece() {
+    public ChessPiece getPiece() {
         // get the piece type
         return this.chess_piece;
     }
@@ -42,7 +42,7 @@ public class Position {
      * @param p the chess piece to place on this square
      */
 
-    public void setPiece(ChessPieces p) {
+    public void setPiece(ChessPiece p) {
         // set piece on the board
         this.chess_piece = p;
     }
