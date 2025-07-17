@@ -19,7 +19,7 @@ public class ChessBoard {
     /**
      * A 2D maxtrix representing the current positions on the chess board.
      */
-    Position[][] current_position;
+    Position[][] board;
     /**
      * A chess piece reference (Plans to use this later when a utility package is needed).
      */
@@ -29,38 +29,38 @@ public class ChessBoard {
      * Constructs a new chess board and initializes all the pieces in their starting positions.
      */
     public ChessBoard() {
-        current_position = new Position[8][8];
+        board = new Position[8][8];
 
         String white = "white";
         String black = "black";
         // Fill all positions as empty first
         for (int i = 0; i < 8; i++)
             for (int j = 0; j < 8; j++)
-                current_position[i][j] = new Position(i, j, null);
+                board[i][j] = new Position(i, j, null);
 
         // White Pieces
-        current_position[0][0].setPiece(new Rook(white));
-        current_position[0][1].setPiece(new Knight(white));
-        current_position[0][2].setPiece(new Bishop(white));
-        current_position[0][3].setPiece(new Queen(white));
-        current_position[0][4].setPiece(new King(white));
-        current_position[0][5].setPiece(new Bishop(white));
-        current_position[0][6].setPiece(new Knight(white));
-        current_position[0][7].setPiece(new Rook(white));
+        board[0][0].setPiece(new Rook(white));
+        board[0][1].setPiece(new Knight(white));
+        board[0][2].setPiece(new Bishop(white));
+        board[0][3].setPiece(new Queen(white));
+        board[0][4].setPiece(new King(white));
+        board[0][5].setPiece(new Bishop(white));
+        board[0][6].setPiece(new Knight(white));
+        board[0][7].setPiece(new Rook(white));
         for (int j = 0; j < 8; j++) // Loop to set all the white pawns
-            current_position[1][j].setPiece(new Pawn(white));
+            board[1][j].setPiece(new Pawn(white));
 
         // Black Pieces
-        current_position[7][0].setPiece(new Rook(black));
-        current_position[7][1].setPiece(new Knight(black));
-        current_position[7][2].setPiece(new Bishop(black));
-        current_position[7][3].setPiece(new Queen(black));
-        current_position[7][4].setPiece(new King(black));
-        current_position[7][5].setPiece(new Bishop(black));
-        current_position[7][6].setPiece(new Knight(black));
-        current_position[7][7].setPiece(new Rook(black));
+        board[7][0].setPiece(new Rook(black));
+        board[7][1].setPiece(new Knight(black));
+        board[7][2].setPiece(new Bishop(black));
+        board[7][3].setPiece(new Queen(black));
+        board[7][4].setPiece(new King(black));
+        board[7][5].setPiece(new Bishop(black));
+        board[7][6].setPiece(new Knight(black));
+        board[7][7].setPiece(new Rook(black));
         for (int j = 0; j < 8; j++) // Loop to set all the black pawns
-            current_position[6][j].setPiece(new Pawn(black));
+            board[6][j].setPiece(new Pawn(black));
     }
 
     /**
@@ -69,7 +69,7 @@ public class ChessBoard {
      * @return a 2D matrix of {@code Position} objects representing the board
      */
     public Position[][] getBoard() {
-        return current_position;
+        return board;
     }
 
     /**
@@ -80,7 +80,7 @@ public class ChessBoard {
      * @return the {@code Position} at the specified coordinates
      */
     public Position getPosition(int x, int y) {
-        return current_position[x][y];
+        return board[x][y];
     }
 
     /**
@@ -92,18 +92,18 @@ public class ChessBoard {
         String black = "black";
 
         // White Pieces
-        current_position[0][0] = new Position(0, 0, new Rook(white));
-        current_position[0][1] = new Position(0, 1, new Knight(white));
-        current_position[0][2] = new Position(0, 2, new Bishop(white));
-        current_position[1][0] = new Position(1, 0, new Pawn(white));
-        current_position[1][1] = new Position(1, 1, new Pawn(white));
+        board[0][0] = new Position(0, 0, new Rook(white));
+        board[0][1] = new Position(0, 1, new Knight(white));
+        board[0][2] = new Position(0, 2, new Bishop(white));
+        board[1][0] = new Position(1, 0, new Pawn(white));
+        board[1][1] = new Position(1, 1, new Pawn(white));
 
         // Black Pieces
-        current_position[7][0] = new Position(7, 0, new Rook(black));
-        current_position[7][1] = new Position(7, 1, new Knight(black));
-        current_position[7][2] = new Position(7, 2, new Bishop(black));
-        current_position[6][0] = new Position(6, 0, new Pawn(black));
-        current_position[6][1] = new Position(6, 1, new Pawn(black));
+        board[7][0] = new Position(7, 0, new Rook(black));
+        board[7][1] = new Position(7, 1, new Knight(black));
+        board[7][2] = new Position(7, 2, new Bishop(black));
+        board[6][0] = new Position(6, 0, new Pawn(black));
+        board[6][1] = new Position(6, 1, new Pawn(black));
         /*
          * WHITE PAWNS
          *      pawn 1: 1, 0
@@ -172,5 +172,16 @@ public class ChessBoard {
          *      WHITE king starts: 0, 4
          *      BLACK king starts: 7, 4
          */
+    }
+
+    public void printBoard() {
+        System.out.println("  A  B  C  D  E  F  G  H"); // Printing the label for the top axis
+        for (int i = 0; i < 8; i++) {
+            System.out.print((8 - i) + " "); // Looping through and print the label for the row
+            for (int j = 0; j < 8; j++) { // each piece in that row otherwise ##
+                System.out.print(board[i][j].toString() + " ");
+            }
+            System.out.println();
+        }
     }
 }
