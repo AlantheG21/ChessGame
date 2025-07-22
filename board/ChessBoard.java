@@ -4,6 +4,9 @@ import position.Position;
 import pieces.ChessPiece;
 import pieces.Rook;
 import pieces.Knight;
+
+import javax.swing.*;
+
 import pieces.Bishop;
 import pieces.Pawn;
 import pieces.Queen;
@@ -174,14 +177,21 @@ public class ChessBoard {
          */
     }
 
-    public void printBoard() {
-        System.out.println("  A  B  C  D  E  F  G  H"); // Printing the label for the top axis
+    public JPanel printBoard() {
+        JPanel boardPanel = new JPanel(new java.awt.GridLayout(8, 8));
+        boardPanel.setPreferredSize(new java.awt.Dimension(400, 400));
         for (int i = 0; i < 8; i++) {
-            System.out.print((8 - i) + " "); // Looping through and print the label for the row
             for (int j = 0; j < 8; j++) { // each piece in that row otherwise ##
-                System.out.print(board[i][j].toString() + " ");
+                if((i + j) % 2 == 0) {
+                    board[i][j].setPosition(new java.awt.Color(216,216,216)); // White square
+                } else {
+                    board[i][j].setPosition(new java.awt.Color(129,129,129)); // Black square
+                }
+                // Display the position with the piece or empty square
+                boardPanel.add(board[i][j].getPosition());
             }
-            System.out.println();
         }
+
+        return boardPanel;
     }
 }

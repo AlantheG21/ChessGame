@@ -27,4 +27,8 @@ public class King extends ChessPiece {
     public String getSymbol() {
         return "K";
     }
+
+    public String getUnicode() {
+        return getColor().equals("white") ? "\u2654" : "\u265A"; // Unicode for white and black King
+    }
 }

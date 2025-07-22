@@ -39,7 +39,7 @@ public abstract class ChessPiece {
      */
     @Override
     public String toString() {
-        return (color.equals("white") ? "w" : "b") + getSymbol();
+        return (color.equals("white") ? "w" : "b") + getUnicode();
     }
 
     /**
@@ -48,4 +48,5 @@ public abstract class ChessPiece {
      * @return The symbol as a string
      */
     public abstract String getSymbol();
+    public abstract String getUnicode();
 }

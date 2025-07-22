@@ -26,4 +26,7 @@ public class Pawn extends ChessPiece {
         return "P";
     }
 
+    public String getUnicode() {
+        return getColor().equals("white") ? "\u2659" : "\u265F"; // Unicode for white and black Pawn
+    }
 }

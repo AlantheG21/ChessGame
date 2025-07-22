@@ -26,4 +26,7 @@ public class Queen extends ChessPiece {
         return "Q";
     }
 
+    public String getUnicode() {
+        return getColor().equals("white") ? "\u2655" : "\u265B"; // Unicode for white and black Queen
+    }
 }
