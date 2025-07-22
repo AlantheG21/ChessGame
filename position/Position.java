@@ -1,7 +1,6 @@
 package position;
 
 import pieces.ChessPiece;
-import javax.swing.*;
 
 /**
  * Represents a position on the chess board.
@@ -13,7 +12,6 @@ public class Position {
     private ChessPiece chess_piece;
     private int x;
     private int y;
-    private JPanel panelSquare;
 
     /**
      * Constructs a position on the board with specified coordinates and a chess piece.
@@ -98,25 +96,5 @@ public class Position {
     @Override
     public String toString() {
         return (chess_piece == null) ? "##" : chess_piece.toString();
-    }
-
-    public void setPosition(java.awt.Color color) {
-        String emptySquare = "";
-        JLabel square = new JLabel(chess_piece != null ? chess_piece.getUnicode() : emptySquare);
-        square.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 24));
-        square.setHorizontalAlignment(JLabel.CENTER);
-        square.setVerticalAlignment(JLabel.CENTER);
-
-        panelSquare = new JPanel(new java.awt.BorderLayout());
-        panelSquare.setBorder(BorderFactory.createLineBorder(java.awt.Color.BLACK));
-        
-        panelSquare.setBackground(color);
-        panelSquare.add(square);
-
-        //return panelSquare;
-    }
-
-    public JPanel getPosition(){
-        return panelSquare;
     }
 }
