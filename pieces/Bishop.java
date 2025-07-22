@@ -25,5 +25,9 @@ public class Bishop extends ChessPiece {
     public String getSymbol() {
         return "B";
     }
+
+    public String getUnicode() {
+        return getColor().equals("white") ? "\u2657" : "\u265D"; // Unicode for white and black Bishop
+    }
 }
 

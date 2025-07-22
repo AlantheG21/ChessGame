@@ -26,4 +26,7 @@ public class Rook extends ChessPiece {
         return "R";
     }
 
+    public String getUnicode() {
+        return getColor().equals("white") ? "\u2656" : "\u265C"; // Unicode for white and black Rook
+    }
 }

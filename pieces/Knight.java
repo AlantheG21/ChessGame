@@ -26,4 +26,7 @@ public class Knight extends ChessPiece {
         return "N";
     }
 
+    public String getUnicode() {
+        return getColor().equals("white") ? "\u2658" : "\u265E"; // Unicode for white and black Knight
+    }
 }
