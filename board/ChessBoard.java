@@ -1,16 +1,7 @@
 package board;
 
-import position.Position;
-import pieces.ChessPiece;
-import pieces.Rook;
-import pieces.Knight;
-
 import javax.swing.*;
-
-import pieces.Bishop;
-import pieces.Pawn;
-import pieces.Queen;
-import pieces.King;
+import java.awt.*;
 
 /**
  * Creates an 8x8 chess board with all the chess pieces.
@@ -19,71 +10,12 @@ import pieces.King;
  * board state, retrieve a specific position, and reset the board.
  */
 public class ChessBoard {
-    /**
-     * A 2D maxtrix representing the current positions on the chess board.
-     */
-    Position[][] board;
-    /**
-     * A chess piece reference (Plans to use this later when a utility package is needed).
-     */
-    ChessPiece pieces;
 
     /**
      * Constructs a new chess board and initializes all the pieces in their starting positions.
      */
     public ChessBoard() {
-        board = new Position[8][8];
-
-        String white = "white";
-        String black = "black";
-        // Fill all positions as empty first
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                board[i][j] = new Position(i, j, null);
-
-        // White Pieces
-        board[0][0].setPiece(new Rook(white));
-        board[0][1].setPiece(new Knight(white));
-        board[0][2].setPiece(new Bishop(white));
-        board[0][3].setPiece(new Queen(white));
-        board[0][4].setPiece(new King(white));
-        board[0][5].setPiece(new Bishop(white));
-        board[0][6].setPiece(new Knight(white));
-        board[0][7].setPiece(new Rook(white));
-        for (int j = 0; j < 8; j++) // Loop to set all the white pawns
-            board[1][j].setPiece(new Pawn(white));
-
-        // Black Pieces
-        board[7][0].setPiece(new Rook(black));
-        board[7][1].setPiece(new Knight(black));
-        board[7][2].setPiece(new Bishop(black));
-        board[7][3].setPiece(new Queen(black));
-        board[7][4].setPiece(new King(black));
-        board[7][5].setPiece(new Bishop(black));
-        board[7][6].setPiece(new Knight(black));
-        board[7][7].setPiece(new Rook(black));
-        for (int j = 0; j < 8; j++) // Loop to set all the black pawns
-            board[6][j].setPiece(new Pawn(black));
-    }
-
-    /**
-     * Returns the current state of the chess board.
-     *
-     * @return a 2D matrix of {@code Position} objects representing the board
-     */
-    public Position[][] getBoard() {
-        return board;
-    }
-
-    /**
-     * Retrieves the {@code Position} object at the given coordinates on the board.
-     *
-     * @param x the row index (0-7)
-     * @param y the column index (0-7)
-     * @return the {@code Position} at the specified coordinates
-     */
-    public Position getPosition(int x, int y) {
-        return board[x][y];
+        
     }
 
     /**
@@ -91,22 +23,6 @@ public class ChessBoard {
      * Currently only resets some of the board and not all of it, and needs further implementation.
      */
     public void resetBoard() {
-        String white = "white";
-        String black = "black";
-
-        // White Pieces
-        board[0][0] = new Position(0, 0, new Rook(white));
-        board[0][1] = new Position(0, 1, new Knight(white));
-        board[0][2] = new Position(0, 2, new Bishop(white));
-        board[1][0] = new Position(1, 0, new Pawn(white));
-        board[1][1] = new Position(1, 1, new Pawn(white));
-
-        // Black Pieces
-        board[7][0] = new Position(7, 0, new Rook(black));
-        board[7][1] = new Position(7, 1, new Knight(black));
-        board[7][2] = new Position(7, 2, new Bishop(black));
-        board[6][0] = new Position(6, 0, new Pawn(black));
-        board[6][1] = new Position(6, 1, new Pawn(black));
         /*
          * WHITE PAWNS
          *      pawn 1: 1, 0
@@ -175,23 +91,5 @@ public class ChessBoard {
          *      WHITE king starts: 0, 4
          *      BLACK king starts: 7, 4
          */
-    }
-
-    public JPanel printBoard() {
-        JPanel boardPanel = new JPanel(new java.awt.GridLayout(8, 8));
-        boardPanel.setPreferredSize(new java.awt.Dimension(400, 400));
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) { // each piece in that row otherwise ##
-                if((i + j) % 2 == 0) {
-                    board[i][j].setPosition(new java.awt.Color(216,216,216)); // White square
-                } else {
-                    board[i][j].setPosition(new java.awt.Color(129,129,129)); // Black square
-                }
-                // Display the position with the piece or empty square
-                boardPanel.add(board[i][j].getPosition());
-            }
-        }
-
-        return boardPanel;
     }
 }
