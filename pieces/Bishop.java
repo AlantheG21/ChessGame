@@ -16,16 +16,6 @@ public class Bishop extends ChessPiece {
         super(color);
     }
 
-    /**
-     * Returns the symbol representing the Bishop.
-     *
-     * @return "B", the symbol for Bishop
-     */
-    @Override
-    public String getSymbol() {
-        return "B";
-    }
-
     public String getUnicode() {
         return getColor().equals("white") ? "\u2657" : "\u265D"; // Unicode for white and black Bishop
     }

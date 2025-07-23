@@ -16,16 +16,6 @@ public class Rook extends ChessPiece {
         super(color);
     }
 
-    /**
-     * Returns the symbol representing the Rook.
-     *
-     * @return "R", the symbol for Rook
-     */
-    @Override
-    public String getSymbol() {
-        return "R";
-    }
-
     public String getUnicode() {
         return getColor().equals("white") ? "\u2656" : "\u265C"; // Unicode for white and black Rook
     }

@@ -17,17 +17,6 @@ public class King extends ChessPiece {
         super(color);
     }
 
-
-    /**
-     * Returns the symbol representing the King.
-     *
-     * @return "K", the symbol for King
-     */
-    @Override
-    public String getSymbol() {
-        return "K";
-    }
-
     public String getUnicode() {
         return getColor().equals("white") ? "\u2654" : "\u265A"; // Unicode for white and black King
     }
