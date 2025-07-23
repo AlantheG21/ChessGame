@@ -106,6 +106,6 @@ public class Position {
      */
     @Override
     public String toString() {
-        return (chess_piece == null) ? "##" : chess_piece.toString();
+        return (chess_piece == null) ? "" : chess_piece.getUnicode();
     }
 }
