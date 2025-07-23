@@ -43,4 +43,16 @@ public class PositionPanel extends JPanel{
     public int getCol() {
         return col;
     }
+
+    public void setClicked(boolean clicked){
+        isClicked = clicked;
+    }
+
+    public boolean wasClicked(){
+        return isClicked;
+    }
+    
+    public void addClickListener(MouseListener listener) {
+        addMouseListener(listener);
+    }
 }
