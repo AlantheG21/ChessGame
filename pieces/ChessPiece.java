@@ -31,22 +31,5 @@ public abstract class ChessPiece {
         return color;
     }
 
-    /**
-     * Returns a string combining the characters of "w" or "b" for its color and its character symbol to depict
-     * the piece to create a distinguishable tag for each white and black piece.
-     *
-     * @return String representation of the piece and its color
-     */
-    @Override
-    public String toString() {
-        return (color.equals("white") ? "w" : "b") + getUnicode();
-    }
-
-    /**
-     * Returns a string which contains a character which represents the piece.
-     *
-     * @return The symbol as a string
-     */
-    public abstract String getSymbol();
     public abstract String getUnicode();
 }

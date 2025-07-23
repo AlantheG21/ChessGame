@@ -21,10 +21,6 @@ public class Queen extends ChessPiece {
      *
      * @return "Q", the symbol for Queen
      */
-    @Override
-    public String getSymbol() {
-        return "Q";
-    }
 
     public String getUnicode() {
         return getColor().equals("white") ? "\u2655" : "\u265B"; // Unicode for white and black Queen

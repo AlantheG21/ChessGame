@@ -16,16 +16,6 @@ public class Pawn extends ChessPiece {
         super(color);
     }
 
-    /**
-     * Returns the symbol representing the Pawn.
-     *
-     * @return "P", the symbol for Pawn
-     */
-    @Override
-    public String getSymbol() {
-        return "P";
-    }
-
     public String getUnicode() {
         return getColor().equals("white") ? "\u2659" : "\u265F"; // Unicode for white and black Pawn
     }

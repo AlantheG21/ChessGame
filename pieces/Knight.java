@@ -16,16 +16,6 @@ public class Knight extends ChessPiece {
         super(color);
     }
 
-    /**
-     * Returns the symbol representing the Knight.
-     *
-     * @return "N", the symbol for Knight
-     */
-    @Override
-    public String getSymbol() {
-        return "N";
-    }
-
     public String getUnicode() {
         return getColor().equals("white") ? "\u2658" : "\u265E"; // Unicode for white and black Knight
     }
