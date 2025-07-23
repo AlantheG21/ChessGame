@@ -2,6 +2,9 @@ package board;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import chessGame.ChessGame;
 import position.*;
 import pieces.*;
@@ -12,7 +15,7 @@ import pieces.*;
  * for both white and black players. Provides methods to get the current
  * board state, retrieve a specific position, and reset the board.
  */
-public class ChessBoard extends JPanel {
+public class ChessBoard extends JPanel implements MouseListener{
     private ChessGame chessGame;
     private final JPanel[][] boardPanel = new JPanel[8][8];
 
@@ -22,7 +25,7 @@ public class ChessBoard extends JPanel {
     public ChessBoard() {
         chessGame = new ChessGame();
         setLayout(new GridLayout(8, 8));
-        setPreferredSize(new Dimension(400, 400));
+        setPreferredSize(new Dimension(500, 500));
 
         buildBoard();
     }
@@ -109,12 +112,55 @@ public class ChessBoard extends JPanel {
             for (int col = 0; col < 8; col++) {
                 
                 Position position = chessGame.getPosition(row,col);
-                JPanel square = new PositionPanel(position.toString());
+                PositionPanel square = new PositionPanel(position.toString(), row, col);
                 square.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 square.setBackground((row + col) % 2 == 0 ? lightColor : darkColor);
+                square.addClickListener(this); // Add mouse listener for click events
                 boardPanel[row][col] = square;
                 add(square);
             }
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        PositionPanel clickedPanel = (PositionPanel) e.getSource();
+
+        Color lightColor = new Color(216, 216, 216);
+        Color darkColor = new Color(129,129,129);
+
+        int row = clickedPanel.getRow();
+        int col = clickedPanel.getCol();
+
+        // TODO Auto-generated method stub
+        if(clickedPanel.wasClicked()) {
+            clickedPanel.setBackground((row + col) % 2 == 0 ? lightColor : darkColor);
+            clickedPanel.setClicked(false);
+        }
+        else {
+            clickedPanel.setBackground(Color.YELLOW);
+            clickedPanel.setClicked(true);
+        }
+        System.out.println("Clicked on: " + clickedPanel.getLabel() + " at (" + clickedPanel.getRow() + ", " + clickedPanel.getCol() + ")");
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
     }
 }
