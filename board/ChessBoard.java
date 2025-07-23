@@ -2,6 +2,9 @@ package board;
 
 import javax.swing.*;
 import java.awt.*;
+import chessGame.ChessGame;
+import position.*;
+import pieces.*;
 
 /**
  * Creates an 8x8 chess board with all the chess pieces.
@@ -9,13 +12,19 @@ import java.awt.*;
  * for both white and black players. Provides methods to get the current
  * board state, retrieve a specific position, and reset the board.
  */
-public class ChessBoard {
+public class ChessBoard extends JPanel {
+    private ChessGame chessGame;
+    private final JPanel[][] boardPanel = new JPanel[8][8];
 
     /**
      * Constructs a new chess board and initializes all the pieces in their starting positions.
      */
     public ChessBoard() {
-        
+        chessGame = new ChessGame();
+        setLayout(new GridLayout(8, 8));
+        setPreferredSize(new Dimension(400, 400));
+
+        buildBoard();
     }
 
     /**
@@ -91,5 +100,21 @@ public class ChessBoard {
          *      WHITE king starts: 0, 4
          *      BLACK king starts: 7, 4
          */
+    }
+
+    private void buildBoard(){
+        Color lightColor = new Color(216, 216, 216);
+        Color darkColor = new Color(129,129,129);
+        for(int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                
+                Position position = chessGame.getPosition(row,col);
+                JPanel square = new PositionPanel(position.toString());
+                square.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                square.setBackground((row + col) % 2 == 0 ? lightColor : darkColor);
+                boardPanel[row][col] = square;
+                add(square);
+            }
+        }
     }
 }
