@@ -10,20 +10,22 @@ import pieces.ChessPiece;
  */
 public class Position {
     private ChessPiece chess_piece;
-    private int x;
-    private int y;
+    private int row;
+    private int col;
+    private String color;
 
     /**
      * Constructs a position on the board with specified coordinates and a chess piece.
      *
-     * @param x           the row index of the position (0–7)
-     * @param y           the column index of the position (0–7)
+     * @param row           the row index of the position (0–7)
+     * @param col           the column index of the position (0–7)
      * @param chess_piece the chess piece at this position (can be {@code null})
      */
-    public Position(int x, int y, ChessPiece chess_piece) {
+    public Position(int row, int col, ChessPiece chess_piece, String color) {
         this.setPiece(chess_piece);
-        this.setX(x);
-        this.setY(y);
+        this.setColor(color);
+        this.setRow(row);
+        this.setCol(col);
     }
 
     /**
@@ -42,9 +44,9 @@ public class Position {
      * @param p the chess piece to place on this square
      */
 
-    public void setPiece(ChessPiece p) {
+    public void setPiece(ChessPiece piece) {
         // set piece on the board
-        this.chess_piece = p;
+        this.chess_piece = piece;
     }
 
     /**
@@ -52,19 +54,19 @@ public class Position {
      *
      * @return the row index
      */
-    public int getX() {
+    public int getRow() {
         // get X coordinate
-        return this.x;
+        return this.row;
     }
 
     /**
      * Sets the x-coordinate (row) of this position.
      *
-     * @param x the row index to set
+     * @param row the row index to set
      */
-    public void setX(int x) {
+    public void setRow(int row) {
         // set X coordinate
-        this.x = x;
+        this.row = row;
     }
 
     /**
@@ -72,19 +74,28 @@ public class Position {
      *
      * @return the column index
      */
-    public int getY() {
+    public int getCol() {
         // get Y coordinate
-        return this.y;
+        return this.col;
     }
 
     /**
      * Sets the y-coordinate (column) of this position.
      *
-     * @param y the column index to set
+     * @param col the column index to set
      */
-    public void setY(int y) {
+    public void setCol(int col) {
         // set Y coordinate
-        this.y = y;
+        this.col = col;
+    }
+
+    private String setColor(String color) {
+        this.color = color;
+        return this.color;
+    }
+
+    public String getColor() {
+        return this.color;
     }
 
     /**
