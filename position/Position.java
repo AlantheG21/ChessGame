@@ -12,7 +12,6 @@ public class Position {
     private ChessPiece chess_piece;
     private int row;
     private int col;
-    private String color;
 
     /**
      * Constructs a position on the board with specified coordinates and a chess piece.
@@ -23,7 +22,6 @@ public class Position {
      */
     public Position(int row, int col, ChessPiece chess_piece, String color) {
         this.setPiece(chess_piece);
-        this.setColor(color);
         this.row = row;
         this.col = col;
     }
@@ -67,15 +65,6 @@ public class Position {
     public int getCol() {
         // get Y coordinate
         return this.col;
-    }
-
-    private String setColor(String color) {
-        this.color = color;
-        return this.color;
-    }
-
-    public String getColor() {
-        return this.color;
     }
 
     /**
