@@ -16,7 +16,7 @@ public class Main {
         frame.setLayout(new BorderLayout());
 
         ChessBoard chessBoard = new ChessBoard();
-        frame.add(chessBoard.printBoard());
+        frame.add(chessBoard);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
