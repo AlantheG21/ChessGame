@@ -17,7 +17,10 @@ import pieces.*;
  */
 public class ChessBoard extends JPanel implements MouseListener{
     private ChessGame chessGame;
-    private final JPanel[][] boardPanel = new JPanel[8][8];
+    private final PositionPanel[][] boardPanel = new PositionPanel[8][8];
+    private Position selectedPiece = null;
+    Color lightColor = new Color(216, 216, 216);
+    Color darkColor = new Color(129,129,129);
 
     /**
      * Constructs a new chess board and initializes all the pieces in their starting positions.
@@ -106,11 +109,9 @@ public class ChessBoard extends JPanel implements MouseListener{
     }
 
     private void buildBoard(){
-        Color lightColor = new Color(216, 216, 216);
-        Color darkColor = new Color(129,129,129);
         for(int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                
+
                 Position position = chessGame.getPosition(row,col);
                 PositionPanel square = new PositionPanel(position.toString(), row, col);
                 square.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -126,22 +127,57 @@ public class ChessBoard extends JPanel implements MouseListener{
     public void mouseClicked(MouseEvent e) {
         PositionPanel clickedPanel = (PositionPanel) e.getSource();
 
-        Color lightColor = new Color(216, 216, 216);
-        Color darkColor = new Color(129,129,129);
-
         int row = clickedPanel.getRow();
         int col = clickedPanel.getCol();
 
-        // TODO Auto-generated method stub
-        if(clickedPanel.wasClicked()) {
-            clickedPanel.setBackground((row + col) % 2 == 0 ? lightColor : darkColor);
-            clickedPanel.setClicked(false);
-        }
-        else {
+        
+
+        if(selectedPiece == null) {
+            selectedPiece = chessGame.getPosition(row, col);
             clickedPanel.setBackground(Color.YELLOW);
-            clickedPanel.setClicked(true);
+        } 
+
+        
+        else if(selectedPiece.getRow() == row && selectedPiece.getCol() == col) {
+            // Deselect the piece if the same square is clicked
+            clickedPanel.setBackground((row + col) % 2 == 0 ? lightColor : darkColor);
+            selectedPiece = null;
         }
-        System.out.println("Clicked on: " + clickedPanel.getLabel() + " at (" + clickedPanel.getRow() + ", " + clickedPanel.getCol() + ")");
+
+        else {
+            // Move the piece to the new position
+            Position targetPosition = chessGame.getPosition(row, col);
+            PositionPanel targetPanel = boardPanel[row][col];
+
+            if(targetPosition.toString() == "") {
+                targetPosition.setPiece(selectedPiece.getPiece());
+                targetPanel.setLabel(selectedPiece.toString());
+                selectedPiece.setPiece(null); // Clear the previous position
+                boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setLabel("");
+                Color background = (selectedPiece.getRow() + selectedPiece.getCol()) % 2 == 0 ? lightColor : darkColor;
+                boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setBackground(background);
+                selectedPiece = null; // Reset selection
+                return;
+            }
+
+            if(targetPosition.getPiece().getColor() == selectedPiece.getPiece().getColor()) {
+                JOptionPane.showMessageDialog(this, "Cannot move here, position already occupied by " + targetPosition.getPiece().getColor() + " " + targetPosition.toString());
+            }
+
+            else if(targetPosition.toString() == "\u2654" || targetPosition.toString() == "\u265A") {
+                JOptionPane.showMessageDialog(this,"King captured by " + selectedPiece.getPiece().getColor() + ". Game over!");
+                System.exit(0);
+            }
+            else{
+                targetPosition.setPiece(selectedPiece.getPiece());
+                targetPanel.setLabel(selectedPiece.toString());
+                selectedPiece.setPiece(null); // Clear the previous position
+                boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setLabel("");
+                Color background = (selectedPiece.getRow() + selectedPiece.getCol()) % 2 == 0 ? lightColor : darkColor;
+                boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setBackground(background);
+                selectedPiece = null; // Reset selection
+            }
+        }
     }
 
     @Override
