@@ -24,8 +24,8 @@ public class Position {
     public Position(int row, int col, ChessPiece chess_piece, String color) {
         this.setPiece(chess_piece);
         this.setColor(color);
-        this.setRow(row);
-        this.setCol(col);
+        this.row = row;
+        this.col = col;
     }
 
     /**
@@ -60,16 +60,6 @@ public class Position {
     }
 
     /**
-     * Sets the x-coordinate (row) of this position.
-     *
-     * @param row the row index to set
-     */
-    public void setRow(int row) {
-        // set X coordinate
-        this.row = row;
-    }
-
-    /**
      * Returns the y-coordinate (column) of this position.
      *
      * @return the column index
@@ -77,16 +67,6 @@ public class Position {
     public int getCol() {
         // get Y coordinate
         return this.col;
-    }
-
-    /**
-     * Sets the y-coordinate (column) of this position.
-     *
-     * @param col the column index to set
-     */
-    public void setCol(int col) {
-        // set Y coordinate
-        this.col = col;
     }
 
     private String setColor(String color) {
