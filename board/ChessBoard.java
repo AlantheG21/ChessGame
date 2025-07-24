@@ -7,7 +7,6 @@ import java.awt.event.MouseListener;
 
 import chessGame.ChessGame;
 import position.*;
-import pieces.*;
 
 /**
  * Creates an 8x8 chess board with all the chess pieces.
