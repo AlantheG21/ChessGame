@@ -1,12 +1,6 @@
 package chessGame;
 
-import pieces.Bishop;
-import pieces.ChessPiece;
-import pieces.King;
-import pieces.Knight;
-import pieces.Pawn;
-import pieces.Queen;
-import pieces.Rook;
+import pieces.*;
 import position.Position;
 
 public class ChessGame {
