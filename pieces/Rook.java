@@ -16,6 +16,15 @@ public class Rook extends ChessPiece {
         super(color);
     }
 
+    public boolean validMove(int startRow, int startCol, int endRow, int endCol) {
+        // Implement Rook-specific move validation logic here
+        boolean valid = true;
+        if(startRow != endRow && startCol != endCol){
+            valid = false; // Rooks can only move in straight lines
+        }
+        return valid;
+    }
+
     public String getUnicode() {
         return getColor().equals("white") ? "\u2656" : "\u265C"; // Unicode for white and black Rook
     }

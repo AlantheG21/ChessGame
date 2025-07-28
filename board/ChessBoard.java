@@ -37,74 +37,15 @@ public class ChessBoard extends JPanel implements MouseListener{
      * Currently only resets some of the board and not all of it, and needs further implementation.
      */
     public void resetBoard() {
-        /*
-         * WHITE PAWNS
-         *      pawn 1: 1, 0
-         *      pawn 2: 1, 1
-         *      pawn 3: 1, 2
-         *      pawn 4: 1, 3
-         *      pawn 5: 1, 4
-         *      pawn 6: 1, 5
-         *      pawn 7: 1, 6
-         *      pawn 8: 1, 7
-         */
-
-        /*
-         * BLACK PAWNS
-         *      pawn 1: 2, 0
-         *      pawn 2: 2, 1
-         *      pawn 3: 2, 2
-         *      pawn 4: 2, 3
-         *      pawn 5: 2, 4
-         *      pawn 6: 2, 5
-         *      pawn 7: 2, 6
-         *      pawn 8: 2, 7
-         */
-
-        /*
-         * BISHOPS
-         *      WHITE bishops:
-         *          bishop 1: 0, 2
-         *          bishop 2: 0, 5
-         *
-         *      BLACK bishops:
-         *          bishop 1: 7, 2
-         *          bishop 2: 7, 5
-         */
-
-        /*
-         * KNIGHTS
-         *      WHITE knights:
-         *          knight 1: 0, 1
-         *          knight 2: 0, 6
-         *
-         *      BLACK knights:
-         *          knight 1: 7, 1
-         *          knight 2: 7, 6
-         */
-
-        /*
-         * ROOKS
-         *      WHITE rooks:
-         *          rook 1: 0, 0
-         *          root 2: 0, 7
-         *
-         *      BLACK rooks:
-         *          rook 1: 7, 0
-         *          rook 2: 7, 7
-         */
-
-        /*
-         * QUEENS
-         *      WHITE queen starts: 0, 3
-         *      BLACK queen starts: 7, 3
-         */
-
-        /*
-         * KINGS
-         *      WHITE king starts: 0, 4
-         *      BLACK king starts: 7, 4
-         */
+        chessGame.resetBoard();
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                Position position = chessGame.getPosition(row, col);
+                boardPanel[row][col].setLabel(position.toString());
+                boardPanel[row][col].setBackground((row + col) % 2 == 0 ? lightColor : darkColor);
+            }
+        }
+        selectedPiece = null; // Reset selected piece
     }
 
     private void buildBoard(){
@@ -148,18 +89,12 @@ public class ChessBoard extends JPanel implements MouseListener{
             Position targetPosition = chessGame.getPosition(row, col);
             PositionPanel targetPanel = boardPanel[row][col];
 
-            if(targetPosition.toString() == "") {
-                targetPosition.setPiece(selectedPiece.getPiece());
-                targetPanel.setLabel(selectedPiece.toString());
-                selectedPiece.setPiece(null); // Clear the previous position
-                boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setLabel("");
-                Color background = (selectedPiece.getRow() + selectedPiece.getCol()) % 2 == 0 ? lightColor : darkColor;
-                boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setBackground(background);
-                selectedPiece = null; // Reset selection
+            if(targetPosition.getPiece() == null) {
+                move(targetPosition, targetPanel, row, col);
                 return;
             }
 
-            if(targetPosition.getPiece().getColor() == selectedPiece.getPiece().getColor()) {
+            if(targetPosition.getPiece().getColor() == selectedPiece.getPiece().getColor() && selectedPiece.getPiece().validMove(selectedPiece.getRow(), selectedPiece.getCol(), row, col)) {
                 JOptionPane.showMessageDialog(this, "Cannot move here, position already occupied by " + targetPosition.getPiece().getColor() + " " + targetPosition.toString());
             }
 
@@ -168,13 +103,8 @@ public class ChessBoard extends JPanel implements MouseListener{
                 System.exit(0);
             }
             else{
-                targetPosition.setPiece(selectedPiece.getPiece());
-                targetPanel.setLabel(selectedPiece.toString());
-                selectedPiece.setPiece(null); // Clear the previous position
-                boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setLabel("");
-                Color background = (selectedPiece.getRow() + selectedPiece.getCol()) % 2 == 0 ? lightColor : darkColor;
-                boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setBackground(background);
-                selectedPiece = null; // Reset selection
+                // Capture the piece
+                move(targetPosition, targetPanel, row, col);
             }
         }
     }
@@ -197,5 +127,21 @@ public class ChessBoard extends JPanel implements MouseListener{
     @Override
     public void mouseReleased(MouseEvent e) {
         // TODO Auto-generated method stub
+    }
+
+    private void move(Position targetPosition, PositionPanel targetPanel, int row, int col) {
+        if(selectedPiece.getPiece().validMove(selectedPiece.getRow(), selectedPiece.getCol(), row, col)) {
+            displayMove(targetPosition, targetPanel);
+        }
+    }
+
+    private void displayMove(Position targetPosition, PositionPanel targetPanel) {
+        targetPosition.setPiece(selectedPiece.getPiece());
+        targetPanel.setLabel(selectedPiece.toString());
+        selectedPiece.setPiece(null); // Clear the previous position
+        boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setLabel("");
+        Color background = (selectedPiece.getRow() + selectedPiece.getCol()) % 2 == 0 ? lightColor : darkColor;
+        boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setBackground(background);
+        selectedPiece = null; // Reset selection
     }
 }

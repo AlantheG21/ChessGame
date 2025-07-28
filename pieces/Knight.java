@@ -16,6 +16,20 @@ public class Knight extends ChessPiece {
         super(color);
     }
 
+    public boolean validMove(int startRow, int startCol, int endRow, int endCol) {
+        // Implement Knight-specific move validation logic here
+        boolean valid = false;
+        int rowDiff = Math.abs(startRow - endRow);
+        int colDiff = Math.abs(startCol - endCol);
+        
+        // Knights move in an "L" shape: two squares in one direction and one square perpendicular
+        if ((rowDiff == 2 && colDiff == 1) || (rowDiff == 1 && colDiff == 2)) {
+            valid = true;
+        }
+        
+        return valid;
+    }
+
     public String getUnicode() {
         return getColor().equals("white") ? "\u2658" : "\u265E"; // Unicode for white and black Knight
     }

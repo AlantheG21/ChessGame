@@ -16,6 +16,20 @@ public class Bishop extends ChessPiece {
         super(color);
     }
 
+    public boolean validMove(int startRow, int startCol, int endRow, int endCol) {
+        // Implement Bishop-specific move validation logic here
+        boolean valid = false;
+        int rowDiff = Math.abs(startRow - endRow);
+        int colDiff = Math.abs(startCol - endCol);
+        
+        // Bishops move diagonally: the difference in rows must equal the difference in columns
+        if (rowDiff == colDiff) {
+            valid = true;
+        }
+        
+        return valid;
+    }
+
     public String getUnicode() {
         return getColor().equals("white") ? "\u2657" : "\u265D"; // Unicode for white and black Bishop
     }

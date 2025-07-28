@@ -17,6 +17,20 @@ public class King extends ChessPiece {
         super(color);
     }
 
+    public boolean validMove(int startRow, int startCol, int endRow, int endCol) {
+        // Implement King-specific move validation logic here
+        boolean valid = false;
+        int rowDiff = Math.abs(startRow - endRow);
+        int colDiff = Math.abs(startCol - endCol);
+        
+        // Kings can move one square in any direction
+        if ((rowDiff <= 1 && colDiff <= 1) && (rowDiff + colDiff > 0)) {
+            valid = true;
+        }
+        
+        return valid;
+    }
+
     public String getUnicode() {
         return getColor().equals("white") ? "\u2654" : "\u265A"; // Unicode for white and black King
     }

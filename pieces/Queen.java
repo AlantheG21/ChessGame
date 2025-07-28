@@ -16,11 +16,19 @@ public class Queen extends ChessPiece {
         super(color);
     }
 
-    /**
-     * Returns the symbol representing the Queen.
-     *
-     * @return "Q", the symbol for Queen
-     */
+    public boolean validMove(int startRow, int startCol, int endRow, int endCol) {
+        // Implement Queen-specific move validation logic here
+        boolean valid = false;
+        int rowDiff = Math.abs(startRow - endRow);
+        int colDiff = Math.abs(startCol - endCol);
+        
+        // Queens can move any number of squares along a row, column, or diagonal
+        if (rowDiff == 0 || colDiff == 0 || rowDiff == colDiff) {
+            valid = true;
+        }
+        
+        return valid;
+    }
 
     public String getUnicode() {
         return getColor().equals("white") ? "\u2655" : "\u265B"; // Unicode for white and black Queen
