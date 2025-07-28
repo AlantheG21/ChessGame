@@ -32,4 +32,5 @@ public abstract class ChessPiece {
     }
 
     public abstract String getUnicode();
+    public abstract boolean validMove(int startRow, int startCol, int endRow, int endCol);
 }
