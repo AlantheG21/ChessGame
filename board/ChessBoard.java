@@ -128,4 +128,20 @@ public class ChessBoard extends JPanel implements MouseListener{
     public void mouseReleased(MouseEvent e) {
         // TODO Auto-generated method stub
     }
+
+    private void move(Position targetPosition, PositionPanel targetPanel, int row, int col) {
+        if(selectedPiece.getPiece().validMove(selectedPiece.getRow(), selectedPiece.getCol(), row, col)) {
+            displayMove(targetPosition, targetPanel);
+        }
+    }
+
+    private void displayMove(Position targetPosition, PositionPanel targetPanel) {
+        targetPosition.setPiece(selectedPiece.getPiece());
+        targetPanel.setLabel(selectedPiece.toString());
+        selectedPiece.setPiece(null); // Clear the previous position
+        boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setLabel("");
+        Color background = (selectedPiece.getRow() + selectedPiece.getCol()) % 2 == 0 ? lightColor : darkColor;
+        boardPanel[selectedPiece.getRow()][selectedPiece.getCol()].setBackground(background);
+        selectedPiece = null; // Reset selection
+    }
 }
