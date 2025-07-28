@@ -16,6 +16,20 @@ public class Pawn extends ChessPiece {
         super(color);
     }
 
+    public boolean validMove(int startRow, int startCol, int endRow, int endCol) {
+        // Implement Pawn-specific move validation logic here
+        boolean valid = true;
+        int rowDiff = Math.abs(startRow - endRow);
+        if(startCol != endCol){
+            valid = false; // Pawns can only move forward in the same column
+        }
+
+        if(rowDiff > 1){
+            valid = false; // Pawns can only move one square forward
+        }
+        return valid;
+    }
+
     public String getUnicode() {
         return getColor().equals("white") ? "\u2659" : "\u265F"; // Unicode for white and black Pawn
     }
