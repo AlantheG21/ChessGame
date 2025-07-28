@@ -25,7 +25,15 @@ public class Pawn extends ChessPiece {
         }
 
         if(rowDiff > 1){
-            valid = false; // Pawns can only move one square forward
+            if(startRow == 6 && getColor().equals("white")) {
+                valid = (rowDiff <= 2); // White pawns can move two squares forward from the starting position
+            } 
+            else if(startRow == 1 && getColor().equals("black")) {
+                valid = (rowDiff <= 2); // Black pawns can move two squares forward from the starting position
+            } 
+            else {
+                valid = false; // Pawns can only move one square forward otherwise
+            }
         }
         return valid;
     }
